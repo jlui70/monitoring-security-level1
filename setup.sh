@@ -190,6 +190,18 @@ main() {
             setup_stack
             wait_for_services
             validate_services
+            
+            # Configurações adicionais após inicialização
+            log_info "Executando configurações adicionais..."
+            
+            # Configurar Zabbix automaticamente
+            log_info "Configurando Zabbix (templates e DNS)..."
+            ./configure-zabbix.sh
+            
+            # Importar dashboards do Grafana
+            log_info "Importando dashboards para Grafana..."
+            ./import-dashboards.sh
+            
             show_access_info
             ;;
         "start")

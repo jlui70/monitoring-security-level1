@@ -104,10 +104,11 @@ else
     exit 1
 fi
 
-# Buscar template "ICMP Ping"
-echo "🔍 Buscando template 'ICMP Ping'..."
+# Buscar templates necessários
+echo "🔍 Buscando templates necessários..."
 
-TEMPLATE_RESPONSE=$(curl -s -X POST http://localhost:8080/api_jsonrpc.php \
+# Template ICMP Ping
+TEMPLATE_ICMP_RESPONSE=$(curl -s -X POST http://localhost:8080/api_jsonrpc.php \
     -H "Content-Type: application/json-rpc" \
     -d '{
         "jsonrpc": "2.0",
@@ -121,19 +122,65 @@ TEMPLATE_RESPONSE=$(curl -s -X POST http://localhost:8080/api_jsonrpc.php \
         "id": 4
     }')
 
-# Extrair template ID
-TEMPLATE_ID=$(echo "$TEMPLATE_RESPONSE" | grep -o '"templateid":"[^"]*"' | head -1 | cut -d'"' -f4)
+TEMPLATE_ICMP_ID=$(echo "$TEMPLATE_ICMP_RESPONSE" | grep -o '"templateid":"[^"]*"' | head -1 | cut -d'"' -f4)
 
-if [ -z "$TEMPLATE_ID" ]; then
+# Template Zabbix server health
+TEMPLATE_HEALTH_RESPONSE=$(curl -s -X POST http://localhost:8080/api_jsonrpc.php \
+    -H "Content-Type: application/json-rpc" \
+    -d '{
+        "jsonrpc": "2.0",
+        "method": "template.get",
+        "params": {
+            "filter": {
+                "host": ["Zabbix server health"]
+            }
+        },
+        "auth": "'$AUTH_TOKEN'",
+        "id": 5
+    }')
+
+TEMPLATE_HEALTH_ID=$(echo "$TEMPLATE_HEALTH_RESPONSE" | grep -o '"templateid":"[^"]*"' | head -1 | cut -d'"' -f4)
+
+# Template Linux by Zabbix agent active
+TEMPLATE_LINUX_RESPONSE=$(curl -s -X POST http://localhost:8080/api_jsonrpc.php \
+    -H "Content-Type: application/json-rpc" \
+    -d '{
+        "jsonrpc": "2.0",
+        "method": "template.get",
+        "params": {
+            "filter": {
+                "host": ["Linux by Zabbix agent active"]
+            }
+        },
+        "auth": "'$AUTH_TOKEN'",
+        "id": 6
+    }')
+
+TEMPLATE_LINUX_ID=$(echo "$TEMPLATE_LINUX_RESPONSE" | grep -o '"templateid":"[^"]*"' | head -1 | cut -d'"' -f4)
+
+# Verificar se todos os templates foram encontrados
+if [ -z "$TEMPLATE_ICMP_ID" ]; then
     echo "❌ Template 'ICMP Ping' não encontrado"
-    echo "Resposta: $TEMPLATE_RESPONSE"
     exit 1
 fi
 
-echo "✅ Template 'ICMP Ping' encontrado! ID: $TEMPLATE_ID"
+if [ -z "$TEMPLATE_HEALTH_ID" ]; then
+    echo "❌ Template 'Zabbix server health' não encontrado"
+    exit 1
+fi
 
-# Aplicar template ao host
-echo "📋 Aplicando template 'ICMP Ping' ao host 'Zabbix server'..."
+if [ -z "$TEMPLATE_LINUX_ID" ]; then
+    echo "❌ Template 'Linux by Zabbix agent active' não encontrado"
+    exit 1
+fi
+
+echo "✅ Templates encontrados:"
+echo "   • ICMP Ping (ID: $TEMPLATE_ICMP_ID)"
+echo "   • Zabbix server health (ID: $TEMPLATE_HEALTH_ID)"
+echo "   • Linux by Zabbix agent active (ID: $TEMPLATE_LINUX_ID)"
+
+# Aplicar todos os templates ao host
+echo "📋 Aplicando todos os templates ao host 'Zabbix server'..."
 
 LINK_RESPONSE=$(curl -s -X POST http://localhost:8080/api_jsonrpc.php \
     -H "Content-Type: application/json-rpc" \
@@ -144,23 +191,29 @@ LINK_RESPONSE=$(curl -s -X POST http://localhost:8080/api_jsonrpc.php \
             "hostid": "'$HOST_ID'",
             "templates": [
                 {
-                    "templateid": "'$TEMPLATE_ID'"
+                    "templateid": "'$TEMPLATE_ICMP_ID'"
+                },
+                {
+                    "templateid": "'$TEMPLATE_HEALTH_ID'"
+                },
+                {
+                    "templateid": "'$TEMPLATE_LINUX_ID'"
                 }
             ]
         },
         "auth": "'$AUTH_TOKEN'",
-        "id": 5
+        "id": 7
     }')
 
-# Verificar resultado da aplicação do template
+# Verificar resultado da aplicação dos templates
 if echo "$LINK_RESPONSE" | grep -q '"result"'; then
-    echo "✅ Template 'ICMP Ping' aplicado com sucesso!"
-    echo "📊 Itens de monitoramento disponíveis:"
-    echo "   • ICMP ping"
-    echo "   • ICMP loss"  
-    echo "   • ICMP response time"
+    echo "✅ Todos os templates aplicados com sucesso!"
+    echo "📊 Templates ativos no host 'Zabbix server':"
+    echo "   • ICMP Ping (conectividade)"
+    echo "   • Zabbix server health (saúde do servidor)"
+    echo "   • Linux by Zabbix agent active (métricas do sistema)"
 else
-    echo "❌ Erro ao aplicar template"
+    echo "❌ Erro ao aplicar templates"
     echo "Resposta: $LINK_RESPONSE"
     exit 1
 fi
@@ -169,5 +222,12 @@ echo ""
 echo "🎉 Configuração completa!"
 echo "📋 Verificar em: Configuration → Hosts → Zabbix server"
 echo "   Interface: Agent zabbix-agent2 Connect to DNS"
-echo "   Templates: ICMP Ping (com itens de monitoramento)"
-echo "📊 Dashboard Grafana agora terá dados de ping, latência e perda de pacotes!"
+echo "   Templates aplicados:"
+echo "   • ICMP Ping (conectividade)"
+echo "   • Zabbix server health (saúde do servidor)"  
+echo "   • Linux by Zabbix agent active (métricas do sistema)"
+echo ""
+echo "📊 Dashboards Grafana agora terão dados completos:"
+echo "   • Ping, latência e perda de pacotes"
+echo "   • Métricas de saúde do Zabbix"
+echo "   • Métricas completas do sistema Linux"

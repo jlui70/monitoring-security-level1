@@ -104,25 +104,26 @@ docker-compose ps
 - **Prometheus & Grafana:** 3-5 minutos ✅
 - **Zabbix:** 10-15 minutos ⏰ (criação de tabelas do banco)
 
-### **🔧 Configuração Automática do Zabbix (Obrigatória):**
-Após o Zabbix estar acessível, execute:
+### **🔧 Configuração Automática (Incluída no Setup):**
+
+O script `./setup.sh` executa automaticamente:
+
+✅ **configure-zabbix.sh** - Configura templates e DNS do Zabbix
+✅ **import-dashboards.sh** - Importa dashboards editáveis para o Grafana
+
+**🎯 Resultado:** Dashboards **totalmente editáveis** após setup!
+
+**O que você pode fazer:**
+- ✅ Editar dashboards livremente  
+- ✅ Salvar modificações permanentemente
+- ✅ Criar novos dashboards personalizados
+- ✅ Duplicar e customizar existentes
+- ✅ Adicionar seus próprios monitoramentos
+
+**Execução manual (se necessário):**
 ```bash
-./configure-zabbix.sh
-```
-
-**O que o script faz automaticamente:**
-- ✅ Configura o Zabbix Agent para usar DNS em vez de IP
-- ✅ Aplica o template "ICMP Ping" para monitoramento de conectividade  
-- ✅ Configura itens: ping, latência e perda de pacotes
-- ✅ Deixa os dashboards do Grafana funcionais com dados reais
-
-**Resultado esperado:**
-```
-🎉 Configuração completa!
-📊 Itens de monitoramento disponíveis:
-   • ICMP ping
-   • ICMP loss  
-   • ICMP response time
+./configure-zabbix.sh    # Apenas configuração Zabbix
+./import-dashboards.sh   # Apenas importação dashboards
 ```
 
 ### **Verificação de Saúde:**
