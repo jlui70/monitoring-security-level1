@@ -5,3 +5,9 @@ providers:
     type: file
     options:
       path: /etc/grafana/provisioning/dashboards
+      foldersFromFilesStructure: true
+  - name: 'monitoring-dashboards'
+    type: file
+    options:
+      path: /var/lib/grafana/dashboards
+      foldersFromFilesStructure: true

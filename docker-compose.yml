@@ -77,6 +77,7 @@ services:  # Definição dos containers
     volumes:
       - grafana-data:/var/lib/grafana
       - ./grafana/provisioning:/etc/grafana/provisioning  # Config automática dos dashboards/datasources
+      - ./grafana/dashboards:/var/lib/grafana/dashboards  # Dashboards JSON
     restart: unless-stopped
     ports:
       - "3000:3000"  # Porta do Grafana

@@ -87,19 +87,44 @@ cd monitoring-security-level1
 # 2. Suba a stack completa
 docker-compose up -d
 
-# 3. Aguarde a inicialização (2-3 minutos)
+# 3. Aguarde a inicialização (10-15 minutos para Zabbix)
 docker-compose ps
 
-# 4. Acesse as interfaces:
+# 4. Configure o Zabbix Agent (depois que Zabbix estiver acessível)
+./configure-zabbix.sh
+
+# 5. Acesse as interfaces:
 # Zabbix: http://localhost:8080 (Admin/zabbix)
 # Grafana: http://localhost:3000 (admin/admin)
 # Prometheus: http://localhost:9090
 ```
 
+### **⚠️ Tempos de Inicialização Importantes:**
+- **MySQL:** 2-3 minutos ✅
+- **Prometheus & Grafana:** 3-5 minutos ✅
+- **Zabbix:** 10-15 minutos ⏰ (criação de tabelas do banco)
+
+### **🔧 Configuração Manual do Zabbix (Obrigatória):**
+Após o Zabbix estar acessível, execute:
+```bash
+./configure-zabbix.sh
+```
+
+Ou configure manualmente:
+1. Acesse Zabbix → Configuration → Hosts
+2. Clique em "Zabbix server"
+3. Vá em "Interfaces"
+4. Altere "Connect to" de **IP** para **DNS**
+5. Em "DNS name" coloque: `zabbix-agent2`
+6. Clique "Update"
+
 ### **Verificação de Saúde:**
 ```bash
 # Status dos containers
 docker-compose ps
+
+# Logs do Zabbix (para acompanhar inicialização)
+docker-compose logs -f zabbix-server
 
 # Logs em caso de problemas
 docker-compose logs -f [serviço]
@@ -107,7 +132,15 @@ docker-compose logs -f [serviço]
 # Teste de conectividade
 curl http://localhost:3000/api/health
 curl http://localhost:9090/api/v1/status/config
+
+# Configurar Zabbix Agent
+./configure-zabbix.sh
 ```
+
+### **🎯 Dashboards Incluídos:**
+1. **Node Exporter - System Metrics** - Métricas do sistema via Prometheus
+2. **Zabbix - Server Monitoring** - Monitoramento via Zabbix
+3. **Prometheus & MySQL Overview** - Visão geral dos serviços
 
 ---
 

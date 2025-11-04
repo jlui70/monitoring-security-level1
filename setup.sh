@@ -104,15 +104,16 @@ wait_for_services() {
     log_info "Aguardando MySQL..."
     sleep 30
     
-    # Aguardar Zabbix
-    log_info "Aguardando Zabbix..."
-    sleep 30
+    # Aguardar Zabbix (precisa mais tempo para criar tabelas)
+    log_info "Aguardando Zabbix criar tabelas no banco (pode demorar até 10 minutos)..."
+    sleep 60
     
     # Aguardar Grafana
     log_info "Aguardando Grafana..."
     sleep 20
     
-    log_success "Todos os serviços devem estar prontos agora"
+    log_success "Primeira fase de inicialização concluída"
+    log_info "IMPORTANTE: O Zabbix pode demorar até 10 minutos para estar totalmente operacional"
 }
 
 # Validar serviços
