@@ -78,25 +78,36 @@ GRAFANA_ADMIN_PASSWORD=admin
 - Portas disponíveis: 3000, 8080, 9090, 9100, 9104, 3306
 - 4GB RAM disponível (recomendado)
 
-### **Deploy Rápido:**
+### **Deploy Automático (Recomendado):**
 ```bash
 # 1. Clone o repositório
 git clone https://github.com/jlui70/monitoring-security-level1.git
 cd monitoring-security-level1
 
-# 2. Suba a stack completa
-docker-compose up -d
+# 2. Execute o setup automático
+./setup.sh
 
-# 3. Aguarde a inicialização (10-15 minutos para Zabbix)
-docker-compose ps
-
-# 4. Configure o Zabbix Agent (depois que Zabbix estiver acessível)
-./configure-zabbix.sh
-
-# 5. Acesse as interfaces:
+# 3. Acesse as interfaces:
 # Zabbix: http://localhost:8080 (Admin/zabbix)
 # Grafana: http://localhost:3000 (admin/admin)
 # Prometheus: http://localhost:9090
+```
+
+**🎯 O `setup.sh` faz TUDO automaticamente:**
+- ✅ Valida pré-requisitos (Docker, portas, recursos)
+- ✅ Sobe todos os containers
+- ✅ Aguarda serviços ficarem prontos
+- ✅ Configura Zabbix (templates, DNS, hosts)
+- ✅ Importa dashboards editáveis no Grafana
+- ✅ Valida funcionamento de todos os serviços
+
+### **Deploy Manual (Alternativo):**
+```bash
+# Apenas se quiser controle manual de cada etapa
+docker-compose up -d
+sleep 120  # Aguardar inicialização
+./configure-zabbix.sh    # Configurar Zabbix
+./import-dashboards.sh   # Importar dashboards
 ```
 
 ### **⚠️ Tempos de Inicialização Importantes:**
@@ -104,45 +115,52 @@ docker-compose ps
 - **Prometheus & Grafana:** 3-5 minutos ✅
 - **Zabbix:** 10-15 minutos ⏰ (criação de tabelas do banco)
 
-### **🔧 Configuração Automática (Incluída no Setup):**
+### **🔧 Script de Setup Inteligente:**
 
-O script `./setup.sh` executa automaticamente:
+O `./setup.sh` é um script completo que:
 
-✅ **configure-zabbix.sh** - Configura templates e DNS do Zabbix
-✅ **import-dashboards.sh** - Importa dashboards editáveis para o Grafana
+**📋 Pré-Verificações:**
+- ✅ Verifica Docker e Docker Compose instalados
+- ✅ Valida portas disponíveis (3000, 8080, 9090, etc.)
+- ✅ Confirma recursos suficientes
 
-**🎯 Resultado:** Dashboards **totalmente editáveis** após setup!
+**🚀 Deploy Automatizado:**
+- ✅ Cria networks necessárias
+- ✅ Sobe containers em ordem otimizada
+- ✅ Aguarda inicialização completa
+- ✅ Valida saúde de todos os serviços
 
-**O que você pode fazer:**
-- ✅ Editar dashboards livremente  
-- ✅ Salvar modificações permanentemente
-- ✅ Criar novos dashboards personalizados
-- ✅ Duplicar e customizar existentes
-- ✅ Adicionar seus próprios monitoramentos
+**⚙️ Configuração Automática:**
+- ✅ **configure-zabbix.sh** - Templates, DNS e hosts
+- ✅ **import-dashboards.sh** - Dashboards editáveis
+- ✅ Datasources no Grafana
+- ✅ Validação final de funcionamento
 
-**Execução manual (se necessário):**
+**🎯 Comandos Adicionais do Setup:**
 ```bash
-./configure-zabbix.sh    # Apenas configuração Zabbix
-./import-dashboards.sh   # Apenas importação dashboards
+./setup.sh start    # Iniciar stack existente
+./setup.sh stop     # Parar stack
+./setup.sh restart  # Reiniciar stack
+./setup.sh status   # Ver status containers
+./setup.sh logs     # Ver logs em tempo real
+./setup.sh clean    # Remover tudo (CUIDADO!)
+./setup.sh help     # Ver todos os comandos
 ```
 
-### **Verificação de Saúde:**
+**💡 Resultado:** Dashboards **100% editáveis** e sistema totalmente configurado!
+
+### **Verificação de Funcionamento:**
 ```bash
-# Status dos containers
-docker-compose ps
+# Ver status de todos os containers
+./setup.sh status
 
-# Logs do Zabbix (para acompanhar inicialização)
-docker-compose logs -f zabbix-server
+# Logs em tempo real
+./setup.sh logs
 
-# Logs em caso de problemas
-docker-compose logs -f [serviço]
-
-# Teste de conectividade
-curl http://localhost:3000/api/health
-curl http://localhost:9090/api/v1/status/config
-
-# Configurar Zabbix Agent
-./configure-zabbix.sh
+# Testar conectividade individual
+curl http://localhost:3000/api/health     # Grafana
+curl http://localhost:9090/api/v1/status  # Prometheus
+curl http://localhost:8080               # Zabbix
 ```
 
 ### **🎯 Dashboards Profissionais Incluídos:**
