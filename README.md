@@ -104,19 +104,26 @@ docker-compose ps
 - **Prometheus & Grafana:** 3-5 minutos ✅
 - **Zabbix:** 10-15 minutos ⏰ (criação de tabelas do banco)
 
-### **🔧 Configuração Manual do Zabbix (Obrigatória):**
+### **🔧 Configuração Automática do Zabbix (Obrigatória):**
 Após o Zabbix estar acessível, execute:
 ```bash
 ./configure-zabbix.sh
 ```
 
-Ou configure manualmente:
-1. Acesse Zabbix → Configuration → Hosts
-2. Clique em "Zabbix server"
-3. Vá em "Interfaces"
-4. Altere "Connect to" de **IP** para **DNS**
-5. Em "DNS name" coloque: `zabbix-agent2`
-6. Clique "Update"
+**O que o script faz automaticamente:**
+- ✅ Configura o Zabbix Agent para usar DNS em vez de IP
+- ✅ Aplica o template "ICMP Ping" para monitoramento de conectividade  
+- ✅ Configura itens: ping, latência e perda de pacotes
+- ✅ Deixa os dashboards do Grafana funcionais com dados reais
+
+**Resultado esperado:**
+```
+🎉 Configuração completa!
+📊 Itens de monitoramento disponíveis:
+   • ICMP ping
+   • ICMP loss  
+   • ICMP response time
+```
 
 ### **Verificação de Saúde:**
 ```bash
@@ -137,10 +144,15 @@ curl http://localhost:9090/api/v1/status/config
 ./configure-zabbix.sh
 ```
 
-### **🎯 Dashboards Incluídos:**
-1. **Node Exporter - System Metrics** - Métricas do sistema via Prometheus
-2. **Zabbix - Server Monitoring** - Monitoramento via Zabbix
-3. **Prometheus & MySQL Overview** - Visão geral dos serviços
+### **🎯 Dashboards Profissionais Incluídos:**
+1. **Node Exporter Prometheus** - Dashboard completo da biblioteca Grafana com métricas avançadas do sistema
+2. **Node Exporter Prometheus v2** - Versão otimizada com painéis adicionais de performance  
+3. **Zabbix Server** - **Dashboard personalizado** com monitoramento específico:
+   - ⚡ Uptime e disponibilidade do sistema
+   - 🌐 Conectividade de rede (ping, latência, perda de pacotes)
+   - 💾 Métricas de memória e CPU
+   - 🖥️ Utilização de recursos do servidor
+   - 📊 Painéis em tempo real com alertas visuais
 
 ---
 

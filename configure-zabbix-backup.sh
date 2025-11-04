@@ -94,80 +94,15 @@ UPDATE_RESPONSE=$(curl -s -X POST http://localhost:8080/api_jsonrpc.php \
         "id": 3
     }')
 
-# Verificar resultado da atualização da interface
+# Verificar resultado
 if echo "$UPDATE_RESPONSE" | grep -q '"result"'; then
     echo "✅ Interface atualizada com sucesso!"
     echo "🎯 Host 'Zabbix server' agora usa DNS: zabbix-agent2"
+    echo ""
+    echo "📋 Verificar em: Configuration → Hosts → Zabbix server"
+    echo "   Interface deve mostrar: Agent zabbix-agent2 Connect to DNS"
 else
     echo "❌ Erro ao atualizar interface"
     echo "Resposta: $UPDATE_RESPONSE"
     exit 1
 fi
-
-# Buscar template "ICMP Ping"
-echo "🔍 Buscando template 'ICMP Ping'..."
-
-TEMPLATE_RESPONSE=$(curl -s -X POST http://localhost:8080/api_jsonrpc.php \
-    -H "Content-Type: application/json-rpc" \
-    -d '{
-        "jsonrpc": "2.0",
-        "method": "template.get",
-        "params": {
-            "filter": {
-                "host": ["ICMP Ping"]
-            }
-        },
-        "auth": "'$AUTH_TOKEN'",
-        "id": 4
-    }')
-
-# Extrair template ID
-TEMPLATE_ID=$(echo "$TEMPLATE_RESPONSE" | grep -o '"templateid":"[^"]*"' | head -1 | cut -d'"' -f4)
-
-if [ -z "$TEMPLATE_ID" ]; then
-    echo "❌ Template 'ICMP Ping' não encontrado"
-    echo "Resposta: $TEMPLATE_RESPONSE"
-    exit 1
-fi
-
-echo "✅ Template 'ICMP Ping' encontrado! ID: $TEMPLATE_ID"
-
-# Aplicar template ao host
-echo "📋 Aplicando template 'ICMP Ping' ao host 'Zabbix server'..."
-
-LINK_RESPONSE=$(curl -s -X POST http://localhost:8080/api_jsonrpc.php \
-    -H "Content-Type: application/json-rpc" \
-    -d '{
-        "jsonrpc": "2.0",
-        "method": "host.update",
-        "params": {
-            "hostid": "'$HOST_ID'",
-            "templates": [
-                {
-                    "templateid": "'$TEMPLATE_ID'"
-                }
-            ]
-        },
-        "auth": "'$AUTH_TOKEN'",
-        "id": 5
-    }')
-
-# Verificar resultado da aplicação do template
-if echo "$LINK_RESPONSE" | grep -q '"result"'; then
-    echo "✅ Template 'ICMP Ping' aplicado com sucesso!"
-    echo "📊 Itens de monitoramento disponíveis:"
-    echo "   • ICMP ping"
-    echo "   • ICMP loss"  
-    echo "   • ICMP response time"
-else
-    echo "❌ Erro ao aplicar template"
-    echo "Resposta: $LINK_RESPONSE"
-    exit 1
-fi
-
-echo ""
-echo "🎉 Configuração completa!"
-echo "📋 Verificar em: Configuration → Hosts → Zabbix server"
-echo "   Interface: Agent zabbix-agent2 Connect to DNS"
-echo "   Templates: ICMP Ping (com itens de monitoramento)"
-echo "📊 Dashboard Grafana agora terá dados de ping, latência e perda de pacotes!"
