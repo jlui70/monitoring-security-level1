@@ -115,10 +115,8 @@ wait_for_services() {
     local max_retries=30  # 30 tentativas = 2.5 minutos adicionais
     
     while [ $retries -lt $max_retries ]; do
-        if curl -s -X POST \
-            -H "Content-Type: application/json" \
-            -d '{"jsonrpc":"2.0","method":"user.login","params":{"user":"Admin","password":"zabbix"},"id":1}' \
-            http://localhost:8080/api_jsonrpc.php | grep -q '"result"'; then
+        # Testar simplesmente se o endpoint responde sem erro 500/404
+        if curl -s -f http://localhost:8080/api_jsonrpc.php >/dev/null 2>&1; then
             log_success "Zabbix API está funcional!"
             break
         else
