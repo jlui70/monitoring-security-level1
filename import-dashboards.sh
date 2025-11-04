@@ -79,15 +79,26 @@ for dashboard_file in "$DASHBOARD_DIR"/*.json; do
         dashboard_name=$(basename "$dashboard_file" .json)
         echo "📊 Importando dashboard: $dashboard_name"
         
-        # Importar dashboard
+        # Criar versão limpa do dashboard (sem id/uid que podem causar conflitos)
+        clean_dashboard="/tmp/dashboard_clean_$$.json"
+        sed 's/"id":[0-9]*,//g; s/"uid":"[^"]*",//g' "$dashboard_file" > "$clean_dashboard"
+        
+        # Criar payload temporário para evitar "Argument list too long"
+        temp_payload="/tmp/dashboard_payload_$$.json"
+        echo "{" > "$temp_payload"
+        echo "\"dashboard\": $(cat "$clean_dashboard")," >> "$temp_payload"
+        echo "\"overwrite\": true" >> "$temp_payload"
+        echo "}" >> "$temp_payload"
+        
+        # Importar dashboard usando arquivo temporário
         curl -s -X POST \
             -H "Content-Type: application/json" \
             -u admin:admin \
             http://localhost:3000/api/dashboards/db \
-            -d "{
-                \"dashboard\": $(cat "$dashboard_file"),
-                \"overwrite\": true
-            }" >/dev/null
+            -d @"$temp_payload" >/dev/null
+        
+        # Limpar arquivos temporários
+        rm -f "$temp_payload" "$clean_dashboard"
         
         echo "✅ Dashboard $dashboard_name importado!"
     fi
