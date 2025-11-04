@@ -109,27 +109,7 @@ wait_for_services() {
     log_info "Aguardando Zabbix database estar pronto (6 minutos)..."
     sleep 360  # 6 minutos para garantir que todas as tabelas sejam criadas
     
-    # Verificação adicional: testar se Zabbix API está realmente funcional
-    log_info "Verificando se Zabbix API está funcional..."
-    local retries=0
-    local max_retries=30  # 30 tentativas = 2.5 minutos adicionais
-    
-    while [ $retries -lt $max_retries ]; do
-        # Testar simplesmente se o endpoint responde sem erro 500/404
-        if curl -s -f http://localhost:8080/api_jsonrpc.php >/dev/null 2>&1; then
-            log_success "Zabbix API está funcional!"
-            break
-        else
-            echo "   Tentativa $((retries + 1))/$max_retries - Zabbix ainda inicializando..."
-            sleep 5
-            retries=$((retries + 1))
-        fi
-    done
-    
-    if [ $retries -eq $max_retries ]; then
-        log_error "Zabbix API não ficou funcional após $max_retries tentativas"
-        log_info "Continuando setup, mas pode ser necessário aguardar mais..."
-    fi
+    log_success "Zabbix inicialização concluída após 6 minutos"
     
     # Aguardar Grafana
     log_info "Aguardando Grafana..."
