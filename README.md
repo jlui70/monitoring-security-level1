@@ -147,8 +147,7 @@ curl http://localhost:9090/api/v1/status/config
 
 ### **🎯 Dashboards Profissionais Incluídos:**
 1. **Node Exporter Prometheus** - Dashboard completo da biblioteca Grafana com métricas avançadas do sistema
-2. **Node Exporter Prometheus v2** - Versão otimizada com painéis adicionais de performance  
-3. **Zabbix Server** - **Dashboard personalizado** com monitoramento específico:
+2. **Zabbix Server** - **Dashboard personalizado** com monitoramento específico:
    - ⚡ Uptime e disponibilidade do sistema
    - 🌐 Conectividade de rede (ping, latência, perda de pacotes)
    - 💾 Métricas de memória e CPU
@@ -228,7 +227,7 @@ Nível 4 → Nível 5: Orquestração com Kubernetes
 
 ### **Monitoramento Ativo:**
 - **115+ itens** coletados pelo Zabbix
-- **4 dashboards** pré-configurados no Grafana
+- **2 dashboards** pré-configurados no Grafana
 - **3 exporters** Prometheus funcionais
 - **Alertas** configurados para problemas críticos
 
