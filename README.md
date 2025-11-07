@@ -136,27 +136,7 @@ O `./setup.sh` é um script completo que:
 - ✅ Datasources no Grafana
 - ✅ Validação final de funcionamento
 
-**🎯 Comandos Adicionais do Setup:**
-```bash
-./setup.sh start    # Iniciar stack existente
-./setup.sh stop     # Parar stack
-./setup.sh restart  # Reiniciar stack
-./setup.sh status   # Ver status containers
-./setup.sh logs     # Ver logs em tempo real
-./setup.sh clean    # Remover tudo (CUIDADO!)
-./setup.sh help     # Ver todos os comandos
 ```
-
-**💡 Resultado:** Dashboards **100% editáveis** e sistema totalmente configurado!
-
-### **Verificação de Funcionamento:**
-```bash
-# Ver status de todos os containers
-./setup.sh status
-
-# Logs em tempo real
-./setup.sh logs
-
 # Testar conectividade individual
 curl http://localhost:3000/api/health     # Grafana
 curl http://localhost:9090/api/v1/status  # Prometheus
@@ -218,6 +198,17 @@ monitoring-security-level1/
 
 ### **📍 Você está aqui: Nível 1**
 Este repositório representa o **ponto de partida** da jornada de segurança.
+
+Caso queira dar continuidade no projeto para o próximo nível (2), execute a limpeza do nível 1 para evitar conflitos na configuração
+
+🧹 Limpeza completa do projeto segurança nível 1
+
+# Parar e remover todos os containers
+cd ~/monitoramento && docker-compose down -v
+
+# Limpeza completa (remove diretporio projeto monitoring-security-level1 e limpa Docker)
+cd ~/ && rm -rf monitoring-security-level1
+docker system prune -f
 
 ### **🚀 Próximos Níveis:**
 1. **[Nível 2: Environment Variables](link-futuro)** - Isolamento por ambiente
