@@ -235,22 +235,6 @@ Nível 4 → Nível 5: Orquestração com Kubernetes
 
 ---
 
-## 📊 **Métricas e Resultados**
-
-### **Performance Baseline:**
-- **Startup time:** ~2-3 minutos
-- **Memory usage:** ~3.5GB total
-- **CPU usage:** <5% em idle
-- **Storage:** ~2GB (dados + logs)
-
-### **Monitoramento Ativo:**
-- **115+ itens** coletados pelo Zabbix
-- **2 dashboards** pré-configurados no Grafana
-- **3 exporters** Prometheus funcionais
-- **Alertas** configurados para problemas críticos
-
----
-
 ## 🔍 **Análise de Segurança**
 
 ### **✅ Pontos Positivos:**
@@ -274,36 +258,12 @@ Nível 4 → Nível 5: Orquestração com Kubernetes
 
 ---
 
-## 🤝 **Contribuições**
-
-Este projeto faz parte de uma série educacional sobre evolução de segurança. 
-
-### **Como contribuir:**
-1. Fork o projeto
-2. Crie uma branch para sua feature
-3. Faça commit das mudanças
-4. Abra um Pull Request
-
-### **Tipos de contribuição bem-vindas:**
-- Melhorias na documentação
-- Otimizações de performance
-- Dashboards adicionais
-- Correções de bugs
-- Sugestões de segurança (para níveis superiores)
-
----
-
 ## 📧 **Contato e Suporte**
 
-- **Autor:** [Seu Nome]
+- **Autor:** [@jlui70](https://devopsproject.com.br/)
 - **GitHub:** [@jlui70](https://github.com/jlui70)
 - **Série Completa:** [Monitoring Security Evolution](link-para-organização)
 
-### **Suporte:**
-- Issues neste repositório para problemas específicos do Nível 1
-- Discussões gerais na [organização principal](link-futuro)
-
----
 
 ## 📜 **Licença**
 
