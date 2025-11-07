@@ -260,7 +260,7 @@ Nível 4 → Nível 5: Orquestração com Kubernetes
 
 ## 📧 **Contato e Suporte**
 
-- **Autor:** [@jlui70](https://devopsproject.com.br/)
+- **Site Devops Project:** [@devopsproject](https://devopsproject.com.br/)
 - **GitHub:** [@jlui70](https://github.com/jlui70)
 - **Série Completa:** [Monitoring Security Evolution](link-para-organização)
 
