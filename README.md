@@ -275,7 +275,7 @@ Nível 4 → Nível 5: Orquestração com Kubernetes
 - **Autor:** [Luiz Jesus]
 - **Portfólio Devops Project:** [@devopsproject](https://devopsproject.com.br/)
 - **GitHub:** [@jlui70](https://github.com/jlui70)
-- **Série Completa:** [Monitoring Security Evolution](link-para-organização)
+- **Série Completa:** [Monitoring Security Evolution](https://github.com/jlui70/monitoring-security-evolution)
 
 
 ## 📜 **Licença**
