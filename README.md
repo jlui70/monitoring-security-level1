@@ -224,25 +224,6 @@ curl http://localhost:8080               # Zabbix
 
 ---
 
-## 🛠️ **Estrutura do Projeto**
-
-```
-monitoring-security-level1/
-├── docker-compose.yml          # Orquestração principal
-├── .env                        # Variáveis de ambiente (Nível 1)
-├── README.md                   # Esta documentação
-├── grafana/
-│   └── provisioning/
-│       ├── datasources/        # Auto-configuração de datasources
-│       └── dashboards/         # Dashboards pré-configurados
-├── prometheus/
-│   └── prometheus.yml          # Configuração de coleta
-└── mysql-exporter/
-    └── my.cnf                  # Configuração do exporter
-```
-
----
-
 ## 🔄 **Evolução do Projeto**
 
 ### **📍 Você está aqui: Nível 1**
