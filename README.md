@@ -26,6 +26,65 @@ Demonstrar na prática como **evoluir a segurança de secrets management** em pr
 
 ---
 
+## 🎯 **Evolução da Série (5 Níveis COMPLETOS)**
+
+<table>
+<thead>
+<tr>
+<th style="min-width: 100px;">Nível</th>
+<th>Foco</th>
+<th>Secrets Storage</th>
+<th>Onde Containers Leem</th>
+<th>Orquestração</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><a href="https://github.com/jlui70/monitoring-security-level1">Level&nbsp;1</a></strong></td>
+<td>Baseline</td>
+<td>Hardcoded</td>
+<td>Código fonte</td>
+<td>Docker Compose</td>
+<td><strong>✅ VOCÊ ESTÁ AQUI</strong></td>
+</tr>
+<tr>
+<td><strong><a href="https://github.com/jlui70/monitoring-security-level2">Level&nbsp;2</a></strong></td>
+<td>Env Vars</td>
+<td><code>.env</code> files</td>
+<td><code>.env</code></td>
+<td>Docker Compose</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><strong><a href="https://github.com/jlui70/monitoring-security-level3">Level&nbsp;3</a></strong></td>
+<td>Vault Foundation</td>
+<td>Vault + <code>.env</code></td>
+<td><code>.env</code></td>
+<td>Docker Compose</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><strong><a href="https://github.com/jlui70/monitoring-security-level4-aws-v2">Level&nbsp;4</a></strong></td>
+<td>AWS Cloud</td>
+<td>AWS Secrets Manager</td>
+<td>AWS API</td>
+<td>Terraform + EC2</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><strong><a href="https://github.com/jlui70/monitoring-security-level5">Level&nbsp;5</a></strong></td>
+<td><strong>K8s + Vault</strong></td>
+<td><strong>Vault (KV v2)</strong></td>
+<td><strong>Kubernetes Secrets</strong></td>
+<td><strong>Kubernetes</strong></td>
+<td>✅</td>
+</tr>
+</tbody>
+</table>
+
+---
+
 ## 🏗️ **Nível 1: Base Funcional - O que você vai encontrar**
 
 ### **Stack Implementada:**
