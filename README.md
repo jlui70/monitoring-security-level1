@@ -290,6 +290,14 @@ Este projeto está sob licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais
 
 ---
 
+**🔐 Enterprise-grade monitoring com AWS Secrets Manager**
+
+[![Terraform](https://img.shields.io/badge/IaC-Terraform-623CE4?style=for-the-badge&logo=terraform)](https://www.terraform.io/)
+[![AWS](https://img.shields.io/badge/Cloud-AWS-FF9900?style=for-the-badge&logo=amazon-aws)](https://aws.amazon.com/)
+[![Docker](https://img.shields.io/badge/Container-Docker-2496ED?style=for-the-badge&logo=docker)](https://www.docker.com/)
+
+</div>
+
 **🎯 Este é o primeiro passo de uma jornada completa de segurança. A evolução continua nos próximos níveis!**
 
 *"A segurança é uma jornada, não um destino. Comece simples, evolua constantemente."*
