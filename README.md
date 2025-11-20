@@ -252,9 +252,6 @@ Caso queira dar continuidade no projeto para o próximo nível (2), execute a li
 
 🧹 Limpeza completa do projeto segurança nível 1
 
-# Parar e remover todos os containers
-cd ~/monitoramento && docker-compose down -v
-
 # Limpeza completa (remove diretporio projeto monitoring-security-level1 e limpa Docker)
 cd ~/ && rm -rf monitoring-security-level1
 docker system prune -f
