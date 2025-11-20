@@ -14,19 +14,9 @@ Este é o **Nível 1** de uma série de 5 repositórios que demonstram a **evolu
 ### 🎯 **Objetivo da Série:**
 Demonstrar na prática como **evoluir a segurança de secrets management** em projetos reais, seguindo as melhores práticas da indústria.
 
-### 📊 **Visão Geral dos 5 Níveis:**
-
-| Nível | Solução | Complexidade | Segurança | Custo | Caso de Uso |
-|-------|---------|--------------|-----------|-------|-------------|
-| **1** | **.env files** | ⭐ | ⭐ | ⭐⭐⭐ | **Desenvolvimento local** |
-| **2** | **Environment Variables** | ⭐⭐ | ⭐⭐ | ⭐⭐⭐ | **Staging/Homologação** |
-| **3** | **HashiCorp Vault** | ⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐ | **Enterprise On-Premise** |
-| **4** | **AWS Secrets Manager** | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐ | **Cloud-First Production** |
-| **5** | **Kubernetes + External Secrets** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐ | **Multi-Cloud Enterprise** |
-
 ---
 
-## 🎯 **Evolução da Série (5 Níveis COMPLETOS)**
+## 📊 **Evolução da Série (5 Níveis COMPLETOS)**
 
 <table>
 <thead>
