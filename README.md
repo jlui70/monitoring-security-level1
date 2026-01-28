@@ -7,12 +7,23 @@
 
 ---
 
-## 📋 **Sobre Este Projeto**
+## 📋 Sobre o Projeto
 
-Este é o **Nível 1** de uma série de 5 repositórios que demonstram a **evolução completa de segurança** em ambientes containerizados, desde configurações básicas até implementações enterprise-grade com AWS e Kubernetes.
+Este projeto apresenta uma stack completa de monitoramento com Docker Compose, servindo como baseline (Nível 1) de uma série evolutiva de 5 níveis focada em secrets management e segurança em ambientes containerizados.
 
-### 🎯 **Objetivo da Série:**
-Demonstrar na prática como **evoluir a segurança de secrets management** em projetos reais, seguindo as melhores práticas da indústria.
+Para demonstrar a base funcional, implementei manualmente todos os componentes de monitoramento:
+
+🐳 Docker Compose orquestrando stack completa de monitoramento
+📊 Zabbix Server 7.0.5 para monitoramento de infraestrutura
+📈 Grafana 12.0.2 com dashboards automatizados e visualização avançada
+⏱️ Prometheus coletando métricas time-series de toda stack
+🗄️ MySQL 8.3 como banco de dados principal
+📡 Node Exporter + MySQL Exporter capturando 115+ métricas
+🔧 Scripts automatizados de setup e configuração completa
+
+🎯 Objetivo: Estabelecer baseline funcional com configuração básica (credenciais hardcoded) para servir como ponto de partida da evolução de segurança através dos 5 níveis da série.
+
+✅ Resultado: Stack de monitoramento 100% operacional com dashboards profissionais, alertas configurados e integração completa entre ferramentas, documentando a configuração inicial antes da implementação progressiva de secrets management (variáveis de ambiente, Vault, AWS Secrets Manager e Kubernetes Secrets).
 
 ---
 
@@ -270,33 +281,30 @@ Nível 4 → Nível 5: Orquestração com Kubernetes
 
 ---
 
-## 📧 **Contato e Suporte**
-
-- **Autor:** [Luiz Jesus]
-- **Portfólio Devops Project:** [@devopsproject](https://devopsproject.com.br/)
-- **GitHub:** [@jlui70](https://github.com/jlui70)
-- **Série Completa:** [Monitoring Security Evolution](https://github.com/jlui70/monitoring-security-evolution)
-
-
-## 📜 **Licença**
+## � Licença
 
 Este projeto está sob licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 
 ---
 
-## 🏷️ **Tags**
+## 📞 Contato e Suporte
 
-`docker` `monitoring` `zabbix` `grafana` `prometheus` `security` `devops` `mysql` `level1` `baseline`
+### 🌐 Conecte-se Comigo
+
+- 📹 **YouTube**: [DevOps Project](https://devopsproject.com.br/)
+- 💼 **Portfólio**: [devopsproject.com.br](https://devopsproject.com.br/)
+- 💻 **GitHub**: [@jlui70](https://github.com/jlui70)
+
+### 🌟 Gostou do Projeto?
+
+Se este projeto foi útil para você:
+
+- ⭐ Dê uma estrela nos repositórios
+- 🔄 Compartilhe com a comunidade
+- 📹 Inscreva-se no canal do YouTube
+- 🤝 Contribua com melhorias
 
 ---
-
-**🔐 Enterprise-grade monitoring com AWS Secrets Manager**
-
-[![Terraform](https://img.shields.io/badge/IaC-Terraform-623CE4?style=for-the-badge&logo=terraform)](https://www.terraform.io/)
-[![AWS](https://img.shields.io/badge/Cloud-AWS-FF9900?style=for-the-badge&logo=amazon-aws)](https://aws.amazon.com/)
-[![Docker](https://img.shields.io/badge/Container-Docker-2496ED?style=for-the-badge&logo=docker)](https://www.docker.com/)
-
-</div>
 
 **🎯 Este é o primeiro passo de uma jornada completa de segurança. A evolução continua nos próximos níveis!**
 
