@@ -1,6 +1,10 @@
 # 🔐 Monitoring Security Evolution - Nível 1: Base Funcional
 ## Stack de Monitoramento com Zabbix, Grafana e Prometheus
 
+<div align="center">
+  <img src="Diagrama camadas Monitoring Security 1.png" alt="Arquitetura Monitoring Security Level 1" width="800">
+</div>
+
 ![Security Level](https://img.shields.io/badge/Security%20Level-1%20Basic-red)
 ![Docker](https://img.shields.io/badge/Docker-Compose-blue)
 ![Status](https://img.shields.io/badge/Status-Production%20Ready-green)
